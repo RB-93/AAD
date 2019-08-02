@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AAD</string>
+    <string name="cust_toast_btn">अनुकूलित टोस्ट</string>
+    <string name="custom_toast_text">अनुकूलित टोस्ट क्लिक किया</string>
+    <string name="no_desc">कोई विवरण उपलब्थ नहीं</string>
+    <string name="sb_actiontext">ठीक</string>
+    <string name="snackbar_btn">स्नेकबार</string>
+    <string name="snackbar_text">स्नेकबार बटन क्लिक किया</string>
+    <string name="toast_btn">टोस्ट</string>
+    <string name="toast_text">टोस्ट बटन क्लिक किया</string>
+    <string name="notify">मुझे सूचित करो!</string>
+    <string name="mascot_notify">Mascot Notification</string>
+    <string name="mascot_notify_desc">शुभंकर अधिसूचना</string>
+    <string name="notify_content_title">आपको सूचित कर दिया गया है!</string>
+    <string name="notify_content_text">यह आपका सूचना पाठ है।</string>
+    <string name="next">अगला</string>
+    <string name="update">मुझे अद्यतन करो!</string>
+    <string name="cancel">मुझे रद्द करो!</string>
+    <string name="notify_update">अधिसूचना अद्यतन!</string>
+    <string name="notify_update_action_text">अधिसूचना अद्यतन करें</string>
+</resources>

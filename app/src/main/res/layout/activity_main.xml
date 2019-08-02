@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="showToast"
+        android:text="@string/toast_btn"/>
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/btn1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-58dp"
+        android:text="@string/cust_toast_btn"
+        android:onClick="showCustomToast"/>
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/btn2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-58dp"
+        android:text="@string/snackbar_btn"
+        android:onClick="showSnackBar"/>
+
+    <LinearLayout
+        android:id="@+id/next_btn_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:elevation="8dp"
+            android:background="@color/colorAccent"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+</RelativeLayout>

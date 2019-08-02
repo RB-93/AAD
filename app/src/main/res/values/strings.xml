@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name" translatable="false">AAD</string>
+    <string name="toast_btn">Toast</string>
+    <string name="cust_toast_btn">Custom Toast</string>
+    <string name="snackbar_btn">Snackbar</string>
+    <string name="toast_text">Toast button clicked</string>
+    <string name="no_desc">No Content Description</string>
+    <string name="custom_toast_text">Custom toast clicked</string>
+    <string name="snackbar_text">SnackBar button clicked</string>
+    <string name="sb_actiontext">OK</string>
+    <string name="notify">Notify Me!</string>
+    <string name="mascot_notify">Mascot Notification</string>
+    <string name="mascot_notify_desc">Notification from Mascot</string>
+    <string name="notify_content_title">You\'ve been notified!</string>
+    <string name="notify_content_text">This is your notification text.</string>
+    <string name="next">Next</string>
+    <string name="update">Update Me!</string>
+    <string name="cancel">Cancel Me!</string>
+    <string name="notify_update">Notification Updated!</string>
+    <string name="notify_update_action_text">Update Notification</string>
+</resources>

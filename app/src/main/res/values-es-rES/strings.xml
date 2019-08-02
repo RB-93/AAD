@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AAD</string>
+    <string name="no_desc">Sin descripción de contenido</string>
+    <string name="sb_actiontext">"DE ACUERDO "</string>
+    <string name="snackbar_btn">Snackbar</string>
+    <string name="snackbar_text">Snackbar</string>
+    <string name="toast_btn">Toast</string>
+    <string name="toast_text">"Botón de Toast hecho clic "</string>
+    <string name="custom_toast_text">Toast personalizado hecho clic</string>
+    <string name="cust_toast_btn">Toast personalizada</string>
+    <string name="notify">¡Notificarme!</string>
+    <string name="mascot_notify">Notificación de mascota</string>
+    <string name="mascot_notify_desc">Notificación de la mascota</string>
+    <string name="notify_content_title">¡Has sido notificado!</string>
+    <string name="notify_content_text">Este es tu texto de notificación.</string>
+    <string name="next">próximo</string>
+    <string name="update">¡Ponme al día!</string>
+    <string name="cancel">Cancelarme!</string>
+    <string name="notify_update">Notificación actualizada!</string>
+    <string name="notify_update_action_text">Notificación de actualización</string>
+</resources>
