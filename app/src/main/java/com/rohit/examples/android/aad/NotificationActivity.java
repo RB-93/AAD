@@ -28,6 +28,9 @@ public class NotificationActivity extends AppCompatActivity {
     private Button btn_update;
     private Button btn_cancel;
 
+    // Member variable Next button
+    private Button btn_next;
+
     // Saving Notification Channel ID string to post Notifications
     public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
 
@@ -94,6 +97,21 @@ public class NotificationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Cancel the notification
                 cancelNotification();
+            }
+        });
+
+
+        // Getting button btn_next view ID from resource
+        btn_next = findViewById(R.id.next_btn);
+
+        /*
+         * Handling Next button clicks using onClickListener()
+         */
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NotificationJobService.class);
+                startActivity(intent);
             }
         });
 
