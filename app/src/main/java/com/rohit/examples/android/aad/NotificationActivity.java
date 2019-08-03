@@ -106,6 +106,7 @@ public class NotificationActivity extends AppCompatActivity {
 
         /*
          * Handling Next button clicks using onClickListener()
+         * Defining intent to next activity
          */
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
