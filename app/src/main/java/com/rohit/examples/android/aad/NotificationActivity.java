@@ -46,11 +46,16 @@ public class NotificationActivity extends AppCompatActivity {
     private static final String ACTION_UPDATE_NOTIFICATION =
             "com.rohit.examples.android.aad.ACTION_UPDATE_NOTIFICATION";
 
+    private static final String ACTION_DISMISS_NOTIFICATION =
+            "com.rohit.examples.android.aad.ACTION_DISMISS_NOTIFICATION";
+
     // Member variable to store NotificationManager object, used to deliver notification to the user
     private NotificationManager mNotificationManager;
 
     // Member variable for the receiver, initialized with default constructor
     private NotificationReceiver mReceiver = new NotificationReceiver();
+
+    private BroadcastReceiver dismissReceiver = new DismissNotificationReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +124,8 @@ public class NotificationActivity extends AppCompatActivity {
         // Registering our broadcast receiver to receive ACTION_UPDATE_NOTIFICATION intent
         registerReceiver(mReceiver, new IntentFilter(ACTION_UPDATE_NOTIFICATION));
 
+        registerReceiver(dismissReceiver, new IntentFilter(ACTION_DISMISS_NOTIFICATION));
+
         // Missing call to this issues app crashes
         createNotificationChannel();
 
@@ -180,7 +187,6 @@ public class NotificationActivity extends AppCompatActivity {
         notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
                 .bigPicture(androidImage)
                 .setBigContentTitle(getString(R.string.notify_update)));
-        //              .setDeleteIntent(dismissPendingIntent);
 
         mNotificationManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 
@@ -257,6 +263,12 @@ public class NotificationActivity extends AppCompatActivity {
         PendingIntent notificationPendingIntent = PendingIntent
                 .getActivity(this, NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Intent dismissNotificationIntent = new Intent(this, DismissNotificationReceiver.class)
+                .setAction(ACTION_DISMISS_NOTIFICATION);
+
+        PendingIntent dismissPendingIntent = PendingIntent
+                .getBroadcast(getApplicationContext(), NOTIFICATION_ID, dismissNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
         NotificationCompat.Builder notifyBuilder;
 
         notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
@@ -266,6 +278,7 @@ public class NotificationActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentIntent(notificationPendingIntent)
+                .setDeleteIntent(dismissPendingIntent)
                 .setAutoCancel(true);
 
         return notifyBuilder;
@@ -294,6 +307,19 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     /**
+     * Unregistering our broadcast receiver before the activity is destroyed by the Android Framework.
+     * Call to unregisterReceiver() by passing in BroadcastReceiver object.
+     */
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        unregisterReceiver(dismissReceiver);
+
+        super.onDestroy();
+    }
+
+    /**
      * A utility method to handle notification button states on different notification stages: notify(),
        update() and cancel().
      * @param isNotifyEnabled to enable/disable Notify Me! button state
@@ -307,14 +333,19 @@ public class NotificationActivity extends AppCompatActivity {
         btn_cancel.setEnabled(isCancelEnabled);
     }
 
-    /**
-     * Unregistering our broadcast receiver before the activity is destroyed by the Android Framework.
-     * Call to unregisterReceiver() by passing in BroadcastReceiver object.
-     */
+    public class DismissNotificationReceiver extends BroadcastReceiver {
 
-    @Override
-    protected void onDestroy() {
-        unregisterReceiver(mReceiver);
-        super.onDestroy();
+        public DismissNotificationReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String dismissAction = intent.getAction();
+
+            assert dismissAction != null;
+            if (dismissAction.equals(ACTION_DISMISS_NOTIFICATION)) {
+                setNotificationButtonState(true, false, false);
+            }
+        }
     }
 }

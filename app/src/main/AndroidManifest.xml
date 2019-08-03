@@ -11,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".NotificationJobService"></activity>
+        <activity
+            android:name=".NotificationJobService"
+            android:label="Job Scheduler" />
         <activity
             android:name=".NotificationActivity"
-            android:label="Notification"></activity>
+            android:label="Notification" />
         <activity
             android:name=".MainActivity"
             android:label="Toast &amp; Snackbar">
