@@ -79,15 +79,29 @@ public class JobSchedulerActivity extends AppCompatActivity {
         jobBuilder = new JobInfo.Builder(JOB_ID, serviceName)
                 .setRequiredNetworkType(selectedNetworkOption);
 
-        // Assigning JobInfo object with JobInfo.Builder returned object to hand to the JOb Scheduler
-        JobInfo myJobInfo = jobBuilder.build();
+        /*
+         * A check variable to track network requirements
+         * Default network option is NETWORK_TYPE_NONE nad not valid constraint
+         * Stores true if the network option is not set to default, otherwise false
+         */
+        boolean constraintSet = selectedNetworkOption != JobInfo.NETWORK_TYPE_NONE;
 
-        // Call to schedule() to schedule a job to be executed with JobScheduler object by passing in
-        // JobInfo job object scheduled.
-        mScheduler.schedule(myJobInfo);
+        if (constraintSet) {
+            // Schedule the job and notify the user
 
-        // A toast message to let user know the job was scheduled
-        Toast.makeText(this, getString(R.string.job_scheduled_success_text), Toast.LENGTH_SHORT).show();
+            // Assigning JobInfo object with JobInfo.Builder returned object to hand to the JOb Scheduler
+            JobInfo myJobInfo = jobBuilder.build();
+
+            // Call to schedule() to schedule a job to be executed with JobScheduler object by passing in
+            // JobInfo job object scheduled.
+            mScheduler.schedule(myJobInfo);
+
+            // A toast message to let user know the job was scheduled
+            Toast.makeText(this, getString(R.string.job_scheduled_success_text), Toast.LENGTH_SHORT).show();
+        } else {
+            //A toast message to let user know the valid job constraint not set
+            Toast.makeText(this, getString(R.string.job_constraint_not_set), Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**

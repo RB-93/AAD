@@ -30,4 +30,5 @@
     <string name="cancel_job">Cancel Jobs</string>
     <string name="job_scheduled_success_text">Job Scheduled, job will run when the constraints are met</string>
     <string name="job_cancel_text">Jobs cancelled</string>
+    <string name="job_constraint_not_set">Please set atleast one constraint</string>
 </resources>
