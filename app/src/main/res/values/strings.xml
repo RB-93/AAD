@@ -18,4 +18,16 @@
     <string name="cancel">Cancel Me!</string>
     <string name="notify_update">Notification Updated!</string>
     <string name="notify_update_action_text">Update Notification</string>
+    <string name="job_notify">Job Service notification</string>
+    <string name="job_notify_desc">Notifications from Job Service</string>
+    <string name="notify_job_title">Job Service</string>
+    <string name="notify_job_content_text">Your Job ran to completion!</string>
+    <string name="network_type_title">Network Type Required:</string>
+    <string name="noneNetworkText">None</string>
+    <string name="anyNetworkText">Any</string>
+    <string name="wifiNetworkText">Wifi</string>
+    <string name="schedule_job">Schedule Jobs</string>
+    <string name="cancel_job">Cancel Jobs</string>
+    <string name="job_scheduled_success_text">Job Scheduled, job will run when the constraints are met</string>
+    <string name="job_cancel_text">Jobs cancelled</string>
 </resources>

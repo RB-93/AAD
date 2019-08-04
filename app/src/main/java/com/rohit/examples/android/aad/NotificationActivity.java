@@ -116,7 +116,7 @@ public class NotificationActivity extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NotificationJobService.class);
+                Intent intent = new Intent(getApplicationContext(), JobSchedulerActivity.class);
                 startActivity(intent);
             }
         });

@@ -12,20 +12,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".NotificationJobService"
+            android:name=".JobSchedulerActivity"
             android:label="Job Scheduler" />
         <activity
             android:name=".NotificationActivity"
             android:label="Notification" />
         <activity
             android:name=".MainActivity"
-            android:label="Toast &amp; Snackbar">
+            android:label="Toast &amp; SnackBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".NotificationJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>
