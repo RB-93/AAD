@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +18,14 @@ public class JobSchedulerActivity extends AppCompatActivity {
 
     // Member constant set to 0 to uniquely identify Job IDs
     public static final int JOB_ID = 0;
+
     // Member variable for RadioGroup view
     RadioGroup networkOptions;
+
+    // Member variables Switches Device Idle and Device Charging for setting job options
+    private Switch mDeviceIdleSwitch;
+    private Switch mDeviceChargingSwitch;
+
     // Member variable for job scheduler
     JobScheduler mScheduler;
 
@@ -26,11 +33,14 @@ public class JobSchedulerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_scheduler);
+
+        // Initializing the variables with their ID resource
+        mDeviceIdleSwitch = findViewById(R.id.idleSwitch);
+        mDeviceChargingSwitch = findViewById(R.id.chargingSwitch);
     }
 
     /**
      * Method to schedule jobs
-     *
      * @param view View to be used for creating jobs
      */
     public void scheduleJobs(View view) {
@@ -74,17 +84,25 @@ public class JobSchedulerActivity extends AppCompatActivity {
          * Instantiating JobInfo.Builder object by passing in Job ID and Component Name for Job Service created
          * Call to setRequiredNetworkType() with JobInfo.Builder object by passing in selectedNetworkOption
            to set some description of the kind of network the job need to have.
+         * Call to setRequiresDeviceIdle() with JobInfo.Builder object by passing in user selection in Switch views
+           to specify that to run, the job needs the device to be in idle mode.
+         * Call to setRequiresCharging() with JobInfo.Builder object by passing in user selection in Switch views
+           to specify that to run this job, the device needs to be plugged in.
          */
         JobInfo.Builder jobBuilder;
         jobBuilder = new JobInfo.Builder(JOB_ID, serviceName)
-                .setRequiredNetworkType(selectedNetworkOption);
+                .setRequiredNetworkType(selectedNetworkOption)
+                .setRequiresDeviceIdle(mDeviceIdleSwitch.isChecked())
+                .setRequiresCharging(mDeviceChargingSwitch.isChecked());
 
         /*
          * A check variable to track network requirements
          * Default network option is NETWORK_TYPE_NONE nad not valid constraint
          * Stores true if the network option is not set to default, otherwise false
+         * New constraints i.e., DeviceIdle and DeviceCharging chained in constrainSet
          */
-        boolean constraintSet = selectedNetworkOption != JobInfo.NETWORK_TYPE_NONE;
+        boolean constraintSet = selectedNetworkOption != JobInfo.NETWORK_TYPE_NONE
+                || mDeviceIdleSwitch.isChecked() || mDeviceChargingSwitch.isChecked();
 
         if (constraintSet) {
             // Schedule the job and notify the user
@@ -106,7 +124,6 @@ public class JobSchedulerActivity extends AppCompatActivity {
 
     /**
      * Method to cancel jobs
-     *
      * @param view View to be used to cancel jobs from
      */
     public void cancelJobs(View view) {

@@ -31,4 +31,7 @@
     <string name="job_scheduled_success_text">Job Scheduled, job will run when the constraints are met</string>
     <string name="job_cancel_text">Jobs cancelled</string>
     <string name="job_constraint_not_set">Please set atleast one constraint</string>
+    <string name="requires_title">Requires:</string>
+    <string name="device_idle">Device Idle</string>
+    <string name="device_charging">Device Charging</string>
 </resources>
