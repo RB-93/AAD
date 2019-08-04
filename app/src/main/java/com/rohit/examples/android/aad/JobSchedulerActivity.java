@@ -6,7 +6,9 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,9 @@ public class JobSchedulerActivity extends AppCompatActivity {
     private Switch mDeviceIdleSwitch;
     private Switch mDeviceChargingSwitch;
 
+    // Member variable for Override Deadline SeekBar
+    private SeekBar mSeekBar;
+
     // Member variable for job scheduler
     JobScheduler mScheduler;
 
@@ -34,9 +39,38 @@ public class JobSchedulerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_scheduler);
 
-        // Initializing the variables with their ID resource
+        // Initializing the switch variables with their ID resource
         mDeviceIdleSwitch = findViewById(R.id.idleSwitch);
         mDeviceChargingSwitch = findViewById(R.id.chargingSwitch);
+
+        // Initializing the SeekBar variable with their ID resource
+        mSeekBar = findViewById(R.id.seekBar);
+
+        // Create and initialize SeekBar Progress text variable with Id resource
+        final TextView seekBarProgress = findViewById(R.id.seekBarProgress);
+
+        // Implement SeekBar object to track Progress changes and SeekBar thumb touch
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                // Check SeekBar value greater than 0 to set SeekBar progress label accordingly
+                if (i > 0) {
+                    seekBarProgress.setText(String.format("" + getString(R.string.seekBar_time_unit), i));
+                } else {
+                    seekBarProgress.setText(getString(R.string.deadline_not_set));
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     /**
@@ -53,6 +87,12 @@ public class JobSchedulerActivity extends AppCompatActivity {
 
         // Saving the default network option i.e., NETWORK_TYPE_NONE
         int selectedNetworkOption = JobInfo.NETWORK_TYPE_NONE;
+
+        // Saving the seekBar's progress value
+        int seekBarInteger = mSeekBar.getProgress();
+
+        // Check variable set to true if seekBar progress value greater than 0
+        boolean seekBarSet = seekBarInteger > 0;
 
         /*
          * Assigning the appropriate JobInfo network constant to selected network option using switch
@@ -96,13 +136,25 @@ public class JobSchedulerActivity extends AppCompatActivity {
                 .setRequiresCharging(mDeviceChargingSwitch.isChecked());
 
         /*
+         * If seekBarSet is true, call to setOverrideDeadline() with JobInfo.Builder object
+         * Passing in seekBar progress value multiplied by 1000 (to convert in milliseconds)
+           to Set deadline which is the maximum scheduling latency.
+         * The job will be run by this deadline even if other requirements are not met.
+         */
+        if (seekBarSet) {
+            jobBuilder.setOverrideDeadline(seekBarInteger * 1000);
+        }
+
+        /*
          * A check variable to track network requirements
          * Default network option is NETWORK_TYPE_NONE nad not valid constraint
          * Stores true if the network option is not set to default, otherwise false
          * New constraints i.e., DeviceIdle and DeviceCharging chained in constrainSet
+         * Including the value of seekBarSet as a possible constraint.
          */
         boolean constraintSet = selectedNetworkOption != JobInfo.NETWORK_TYPE_NONE
-                || mDeviceIdleSwitch.isChecked() || mDeviceChargingSwitch.isChecked();
+                || mDeviceIdleSwitch.isChecked() || mDeviceChargingSwitch.isChecked()
+                || seekBarSet;
 
         if (constraintSet) {
             // Schedule the job and notify the user

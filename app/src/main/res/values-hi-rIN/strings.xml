@@ -23,7 +23,7 @@
     <string name="job_notify_desc">Notifications from Job Service</string>
     <string name="notify_job_title">Job Service</string>
     <string name="notify_job_content_text">Your Job ran to completion!</string>
-    <string name="network_type_title">Network Type Required:</string>
+    <string name="network_type_title">Network Type Required: </string>
     <string name="noneNetworkText">None</string>
     <string name="anyNetworkText">Any</string>
     <string name="wifiNetworkText">Wifi</string>
@@ -32,7 +32,10 @@
     <string name="job_scheduled_success_text">Job Scheduled, job will run when the constraints are met</string>
     <string name="job_cancel_text">Jobs cancelled</string>
     <string name="job_constraint_not_set">Please set atleast one constraint</string>
-    <string name="requires_title">Requires:</string>
+    <string name="requires_title">Requires: </string>
     <string name="device_idle">Device Idle</string>
     <string name="device_charging">Device Charging</string>
+    <string name="override_deadline">Override Deadline: </string>
+    <string name="deadline_not_set">Not Set</string>
+    <string name="seekBar_time_unit">%1d$ s</string>
 </resources>
